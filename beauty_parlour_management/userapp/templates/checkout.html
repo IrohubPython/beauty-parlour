@@ -1,0 +1,114 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+    <section class="hero-wrap hero-wrap-2" style="background-image: url({% static 'user/images/bg_2.jpg' %});" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-3 bread">Check Out</h1>
+            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Your</a></span> <span>Check Out Deatils</span></p>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="ftco-section contact-section">
+        <div class="container">
+          <div class="row">
+            
+            <div class="col-md-6">
+              <form action="{% url 'checkout_data' %}" method="post">
+                {% csrf_token %}
+
+                <div class="row">
+                <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="text" name='fname' class="form-control" placeholder="Frist Name">
+                      </div>
+                </div>
+                <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="text" name='lname' class="form-control" placeholder="Last Name">
+                      </div>
+                </div>
+                </div>
+
+                <div class="row">
+                <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" name="mobile" class="form-control" placeholder="Mobile Number">
+                </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="email" name="email" class="form-control" placeholder="Email Id">
+                  </div>
+                </div>
+                </div>
+
+                <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="appt_date">Appointment Date:</label>
+                    <input type="date" name="date" class="form-control" placeholder="Date">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="appt">Appointment Time:</label>
+                    <input type="time" name="time" class="form-control" placeholder="Appointment Time">
+                  </div>
+                </div>
+                </div>
+                
+                <div class="form-group">
+                  <input type="submit" value="Continue to checkout" class="btn btn-primary py-3 px-5">
+                </div>
+              </form>
+            </div>
+            <div class="col-md-6">
+              <p><strong>Your Order</strong></p>
+              <table style="width:100%">
+                  <tr>
+                    <th>Service</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in data %}
+
+                  <tr>
+                    <td>{{i.serviceid.name}}</td>
+                    <td>{{i.serviceid.price}}</td>
+                  </tr>
+                  {% endfor %}
+
+                </tbody>
+                <tfoot>
+                  <tr class="visible-xs">
+                    <td class="text-center"><strong></strong></td>
+                  </tr>
+                  
+                  <tr>
+                    <td></td>
+                    <td colspan="2" class="hidden-xs"></td>
+                    
+                    <td class="hidden-xs text-center"><strong><b>Total:  Rs. {{s.total__sum}}</b></strong></td>
+                  </tr>
+                </tfoot>
+
+           
+              </table>
+      
+            </div>
+          </div>
+        </div>
+   
+      </section> 
+  
+ 
+{% endblock %}
+

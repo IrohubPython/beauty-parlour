@@ -1,0 +1,59 @@
+{% extends 'adminindex.html' %}
+
+{% block content %}
+
+            <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Add services</h4>
+                  {% for a in obj %}
+                  <!-- <p class="card-description"> Basic form elements </p> -->
+                  <form class="forms-sample" action="{% url 'edit_service' id=a.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                      <label for="exampleInputName1">Service Name</label>
+                      <input type="text" class="form-control" id="exampleInputName1" name="name"  value="{{a.name}}" placeholder="Name">
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Select Branch</label>
+                        <div class="col-sm-9">
+                          <select class="form-control" name="branch">
+                            { {% for c in obj1 %} 
+                            <option name="{{c.name}}" value="{{c.name}}">{{c.name}}</option>
+                            {% endfor %}
+                          </select>
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Price</label>
+                      <input type="text" class="form-control" id="exampleInputName1" name="price" value="{{a.price}}" placeholder="Name">
+                    </div>
+
+
+                    <div class="form-group">
+                      <label>Upload Image</label>
+                      <input type="file" value="{{a.image}}"  class="file-upload-default">
+                      <div class="input-group col-xs-12">
+                        <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                        <span class="input-group-append">
+                          <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button class="btn btn-dark">Cancel</button>
+                  </form>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+
+
+            
+            {% endblock %}           
